@@ -8,7 +8,7 @@ class MainPage extends Component {
   constructor(props) {
     super(props);
     const { dispatch } = props;
-    dispatch(cardsActions.getCards(1));
+    dispatch(cardsActions.getCards(0));
     setTimeout(() => {
       dispatch(cardsActions.sortCards("id", "desc"));
     }, 1500);

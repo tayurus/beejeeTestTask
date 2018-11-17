@@ -1,9 +1,12 @@
-import { baseURL } from "./../constants";
+import { baseURL, token, statusReady, statusNotReady } from "./../constants";
 import { handleResponse } from "./../helpers";
+const md5 = require("md5");
 
 export const cardsService = {
   getCards,
-  sortCards
+  sortCards,
+  createCard,
+  patchCard
 };
 
 function getCards(pageNumber) {
@@ -48,6 +51,34 @@ function createCard(newCardData) {
   };
 
   const query = baseURL + "/create?developer=Name";
+
+  return fetch(query, requestOptions).then(handleResponse);
+}
+
+function patchCard(id, newData) {
+  const { text, status } = newData;
+
+  const bodyWithoutSignature =
+    "status=" +
+    (status
+      ? encodeURIComponent(statusReady)
+      : encodeURIComponent(statusNotReady)) +
+    "&text=" +
+    encodeURIComponent(text) +
+    "&token=" +
+    encodeURIComponent(token);
+
+  const md5Hash = md5(bodyWithoutSignature);
+
+  const body =
+    bodyWithoutSignature + "&signature=" + encodeURIComponent(md5Hash);
+
+  const query = baseURL + "/edit/" + id;
+
+  const requestOptions = {
+    method: "POST",
+    body: body
+  };
 
   return fetch(query, requestOptions).then(handleResponse);
 }
