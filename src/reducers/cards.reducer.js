@@ -17,6 +17,28 @@ export function cardsReducer(state = {}, action) {
         ...state,
         error: action.error
       };
+
+    case cardsConstants.SORT_CARDS_REQUEST:
+      return {
+        ...state
+      };
+
+    case cardsConstants.SORT_CARDS_SUCCESS: {
+      console.log("action = ", action);
+      return {
+        ...state,
+        cards: action.cards.message.tasks,
+        sortField: action.sortField,
+        sortDirection: action.sortDirection
+      };
+    }
+
+    case cardsConstants.SORT_CARDS_FAILURE: {
+      return {
+        ...state,
+        error: action.error
+      };
+    }
     default:
       return state;
   }
