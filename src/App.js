@@ -11,6 +11,7 @@ class App extends React.Component {
     super(props);
 
     const { dispatch } = this.props;
+    dispatch(alertActions.success("День добрый!"));
     history.listen((location, action) => {
       // clear alert on location change
       dispatch(alertActions.clear());
@@ -39,6 +40,7 @@ class App extends React.Component {
 }
 
 function mapStateToProps(state) {
+  console.log("state = ", state);
   const { alert } = state;
   return {
     alert
