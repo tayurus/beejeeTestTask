@@ -1,10 +1,10 @@
 import React from "react";
-import { Router, Route } from "react-router-dom";
+import { Router, Route, Switch } from "react-router-dom";
 import { connect } from "react-redux";
 
 import { history } from "./helpers";
 import { alertActions, userActions } from "./actions";
-import { MainPage } from "./pages";
+import { MainPage, Login } from "./pages";
 
 class App extends React.Component {
   constructor(props) {
@@ -30,7 +30,10 @@ class App extends React.Component {
         </div>
 
         <Router history={history}>
-          <Route exact path="/" component={MainPage} />
+          <Switch>
+            <Route exact path="/" component={MainPage} />
+            <Route exact path="/login" component={Login} />
+          </Switch>
         </Router>
       </div>
     );
