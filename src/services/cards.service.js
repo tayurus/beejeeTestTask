@@ -33,3 +33,21 @@ function sortCards(sortField = "id", sortDirection = "asc", pageNumber = 0) {
 
   return fetch(query, requestOptions).then(handleResponse);
 }
+
+function createCard(newCardData) {
+  const { username, email, text, image } = newCardData;
+  var form = new FormData();
+  form.append("username", username);
+  form.append("email", email);
+  form.append("text", text);
+  form.append("image", image);
+
+  const requestOptions = {
+    method: "POST",
+    body: form
+  };
+
+  const query = baseURL + "/create?developer=Name";
+
+  return fetch(query, requestOptions).then(handleResponse);
+}

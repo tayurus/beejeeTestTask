@@ -1,6 +1,7 @@
-import { cardsConstants } from "../constants";
-import { cardsService } from "../services";
+import { cardsConstants } from "./../constants";
+import { cardsService } from "./../services";
 import { alertActions } from "./";
+import { history } from "./../helpers";
 
 export const cardsActions = { getCards, sortCards };
 
@@ -101,6 +102,45 @@ function sortCards(sortField = "id", sortDirection = "asc", pageNumber = 0) {
       error,
       sortField,
       sortDirection
+    };
+  }
+}
+
+function createCard(newCardData) {
+  return dispatch => {
+    dispatch(request());
+    dispatch(alertActions.success("Попытка создать новую карточку..."));
+
+    cardsService.createCard(newCardData).then(
+      res => {
+        const { id } = res.message;
+        dispatch(success(res.message));
+        dispatch(alertActions.success("Карточка создана, ее id = ", id));
+        history.push("/card/" + id);
+      },
+      error => {
+        dispatch(failure(error));
+        dispatch(alertActions.failure("Не получилось создать карточку"));
+      }
+    );
+  };
+
+  function request() {
+    return {
+      type: cardsConstants.CREATE_CARD_REQUEST
+    };
+  }
+  function success(newCard) {
+    return {
+      type: cardsConstants.CREATE_CARD_SUCCESS,
+      newCard
+    };
+  }
+
+  function failure(error) {
+    return {
+      type: cardsConstants.CREATE_CARD_FAILURE,
+      error
     };
   }
 }
