@@ -14,7 +14,7 @@ class MainPage extends Component {
     // setTimeout(() => {
     //   dispatch(cardsActions.sortCards("id", "desc"));
     // }, 1500);
-    dispatch(userActions.login("admin", "123"));
+    // dispatch(userActions.login("admin", "123"));
   }
 
   render() {
