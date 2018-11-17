@@ -32,7 +32,7 @@ export const CardView = props => {
       <hr />
       <div className="d-flex align-items-center my-2 flex-wrap">
         <div className="mr-3">image:</div>
-        <img src={image_path} className="w-100" alt="image from user" />
+        <img src={image_path} className="CardView__img" alt="image from user" />
       </div>
       <hr />
     </div>

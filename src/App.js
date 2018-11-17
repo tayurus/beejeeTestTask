@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import { history, getCardById } from "./helpers";
 import { alertActions, userActions } from "./actions";
 import { MainPage, Login } from "./pages";
-import { CardView } from "./components";
+import { CardView, Header } from "./components";
 
 class App extends React.Component {
   constructor(props) {
@@ -37,11 +37,12 @@ class App extends React.Component {
             <Route
               path="/card/:id"
               render={props => {
-                return (
+                return [
+                  <Header />,
                   <CardView
                     card={getCardById(cards, parseInt(props.match.params.id))}
                   />
-                );
+                ];
               }}
             />
           </Switch>

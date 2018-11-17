@@ -1,6 +1,13 @@
 import { cardsConstants } from "../constants";
 
-export function cardsReducer(state = {}, action) {
+import { sortConstants } from "./../constants";
+
+let initialState = {
+  sortDirection: "asc",
+  sortField: sortConstants[0]
+};
+
+export function cardsReducer(state = initialState, action) {
   switch (action.type) {
     case cardsConstants.GET_CARDS_REQUEST:
       return state;

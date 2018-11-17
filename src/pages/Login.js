@@ -8,6 +8,8 @@ import { Header } from "./../components";
 
 import { Redirect } from "react-router";
 
+import { Input } from "react-materialize";
+
 class Login extends Component {
   constructor(props) {
     super(props);
@@ -40,23 +42,21 @@ class Login extends Component {
       <div className="App container">
         <Header username={username} />
         <form onSubmit={e => e.preventDefault()} className="form-group">
-          <input
+          <Input
             type="text"
-            className="form-control"
             required
             name="user"
             value={user}
             onChange={this.handleValueChange}
-            placeholder="Введите ваш логин"
+            label="Введите ваш логин"
           />
-          <input
+          <Input
             type="password"
-            className="form-control"
             required
             name="password"
             value={password}
             onChange={this.handleValueChange}
-            placeholder="Введите ваш пароль"
+            label="Введите ваш пароль"
           />
           <button type="submit" onClick={this.login} class="btn btn-primary">
             Войти

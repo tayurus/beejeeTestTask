@@ -4,20 +4,18 @@ import { cardsActions, userActions } from "./../actions";
 
 import { connect } from "react-redux";
 
-import { Header, CardView } from "./../components";
+import { Header, CardView, Sort } from "./../components";
 
 import { Pagination } from "react-materialize";
+
+import { sortConstants } from "./../constants";
 
 class MainPage extends Component {
   constructor(props) {
     super(props);
 
-    // setTimeout(() => {
-    //   dispatch(cardsActions.sortCards("id", "desc"));
-    // }, 1500);
-    // dispatch(userActions.login("admin", "123"));
-
     this.loadPage = this.loadPage.bind(this);
+    this.onSortItemClick = this.onSortItemClick.bind(this);
 
     this.loadPage(1);
   }
@@ -27,13 +25,31 @@ class MainPage extends Component {
     dispatch(cardsActions.getCards(page - 1));
   }
 
+  onSortItemClick(item, direction) {
+    const { dispatch } = this.props;
+    dispatch(cardsActions.sortCards(item, direction));
+  }
+
   render() {
-    const { username, cards, totalCardsCount } = this.props;
+    const {
+      username,
+      cards,
+      totalCardsCount,
+      sortField,
+      sortDirection
+    } = this.props;
 
     if (cards) {
       return (
         <div className="App container">
           <Header username={username} />
+
+          <Sort
+            items={sortConstants}
+            currentItem={sortField}
+            direction={sortDirection}
+            onItemClick={this.onSortItemClick}
+          />
 
           <div className="row">
             {cards.map((card, index) => {
@@ -64,12 +80,19 @@ class MainPage extends Component {
 }
 
 function mapStateToProps(state) {
-  const { cards, totalCardsCount } = state.cardsReducer;
+  const {
+    cards,
+    totalCardsCount,
+    sortField,
+    sortDirection
+  } = state.cardsReducer;
   const { username } = state.user;
   return {
     cards,
     username,
-    totalCardsCount
+    totalCardsCount,
+    sortField,
+    sortDirection
   };
 }
 
