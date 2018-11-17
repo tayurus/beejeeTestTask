@@ -19,7 +19,7 @@ class MainPage extends Component {
 
     this.loadPage = this.loadPage.bind(this);
 
-    this.loadPage(0);
+    this.loadPage(1);
   }
 
   loadPage(page) {

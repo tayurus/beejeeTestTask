@@ -2,9 +2,10 @@ import React from "react";
 import { Router, Route, Switch } from "react-router-dom";
 import { connect } from "react-redux";
 
-import { history } from "./helpers";
+import { history, getCardById } from "./helpers";
 import { alertActions, userActions } from "./actions";
 import { MainPage, Login } from "./pages";
+import { CardView } from "./components";
 
 class App extends React.Component {
   constructor(props) {
@@ -20,7 +21,7 @@ class App extends React.Component {
   }
 
   render() {
-    const { alert } = this.props;
+    const { alert, cards } = this.props;
     return (
       <div className="container py-5">
         <div className="text-center">
@@ -32,7 +33,17 @@ class App extends React.Component {
         <Router history={history}>
           <Switch>
             <Route exact path="/" component={MainPage} />
-            <Route exact path="/login" component={Login} />
+            <Route path="/login" component={Login} />
+            <Route
+              path="/card/:id"
+              render={props => {
+                return (
+                  <CardView
+                    card={getCardById(cards, parseInt(props.match.params.id))}
+                  />
+                );
+              }}
+            />
           </Switch>
         </Router>
       </div>
@@ -42,8 +53,10 @@ class App extends React.Component {
 
 function mapStateToProps(state) {
   const { alert } = state;
+  const { cards } = state.cardsReducer;
   return {
-    alert
+    alert,
+    cards
   };
 }
 
