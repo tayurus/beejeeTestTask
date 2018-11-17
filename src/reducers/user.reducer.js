@@ -1,6 +1,6 @@
 import { userConstants } from "../constants";
 
-export function userReducer(state = {}, action) {
+export function user(state = {}, action) {
   switch (action.type) {
     case userConstants.USER_LOGIN_SUCCESS:
       return {

@@ -20,7 +20,7 @@ function login(username, password) {
   };
 
   function success(username) {
-    return { type: userConstants.USER_LOGIN_SUCCESS };
+    return { type: userConstants.USER_LOGIN_SUCCESS, username };
   }
 
   function failure() {

@@ -4,6 +4,8 @@ import { cardsActions, userActions } from "./../actions";
 
 import { connect } from "react-redux";
 
+import { Header } from "./../components";
+
 class MainPage extends Component {
   constructor(props) {
     super(props);
@@ -16,9 +18,10 @@ class MainPage extends Component {
   }
 
   render() {
+    const { username } = this.props;
     return (
-      <div className="App">
-        <h1>NICE</h1>
+      <div className="App container">
+        <Header username={username} />
       </div>
     );
   }
@@ -26,7 +29,11 @@ class MainPage extends Component {
 
 function mapStateToProps(state) {
   const { cards } = state.cardsReducer;
-  return cards;
+  const { username } = state.user;
+  return {
+    cards,
+    username
+  };
 }
 
 const connectedComponent = connect(
