@@ -7,7 +7,9 @@ export const Header = props => {
   return (
     <header className="Header">
       {props.username ? (
-        <div>Добро пожаловать, господин админ!</div>
+        <div class="alert alert-info" role="alert">
+          Добро пожаловать, господин админ!
+        </div>
       ) : (
         <NavLink to="/login">Войти как админ</NavLink>
       )}

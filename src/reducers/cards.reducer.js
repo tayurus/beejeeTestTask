@@ -8,7 +8,8 @@ export function cardsReducer(state = {}, action) {
       return {
         ...state,
         cards: action.cards.message.tasks,
-        pageNumber: action.pageNumber
+        pageNumber: action.pageNumber,
+        totalCardsCount: action.cards.message.total_task_count
       };
     case cardsConstants.GET_CARDS_FAILURE:
       return {
