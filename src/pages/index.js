@@ -1,2 +1,3 @@
-export * from "./MainPage";
+export * from "./Main";
 export * from "./Login";
+export * from "./Create";

@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 
 import { history, getCardById } from "./helpers";
 import { alertActions, userActions } from "./actions";
-import { MainPage, Login } from "./pages";
+import { Main, Login, Create } from "./pages";
 import { CardView, Header } from "./components";
 
 class App extends React.Component {
@@ -25,24 +25,18 @@ class App extends React.Component {
     return (
       <div className="container py-5">
         <div className="text-center">
-          {alert.message && (
-            <div className={`alert ${alert.type}`}>{alert.message}</div>
-          )}
+          {alert.message && <div className={`alert ${alert.type}`}>{alert.message}</div>}
         </div>
 
         <Router history={history}>
           <Switch>
-            <Route exact path="/" component={MainPage} />
+            <Route exact path="/" component={Main} />
             <Route path="/login" component={Login} />
+            <Route path="/create" component={Create} />
             <Route
               path="/card/:id"
               render={props => {
-                return [
-                  <Header />,
-                  <CardView
-                    card={getCardById(cards, parseInt(props.match.params.id))}
-                  />
-                ];
+                return [<Header />, <CardView card={getCardById(cards, parseInt(props.match.params.id))} />];
               }}
             />
           </Switch>

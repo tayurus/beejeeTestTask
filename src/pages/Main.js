@@ -12,7 +12,7 @@ import { sortConstants } from "./../constants";
 
 import { NavLink } from "react-router-dom";
 
-class MainPage extends Component {
+class Main extends Component {
   constructor(props) {
     super(props);
 
@@ -95,6 +95,6 @@ function mapStateToProps(state) {
 const connectedComponent = connect(
   mapStateToProps,
   null
-)(MainPage);
+)(Main);
 
-export { connectedComponent as MainPage };
+export { connectedComponent as Main };

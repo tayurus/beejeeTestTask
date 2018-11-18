@@ -1,10 +1,27 @@
 import React from "react";
 
+import "./CardInputs.css";
+
+import { statusToBool } from "./../../helpers";
+
+import { Input } from "react-materialize";
+
 export const CardInputs = props => {
-  const { username, email, text, image_path, disabledInputs, handleValueChange } = props;
+  const { username, email, text, image_path, status } = props.card;
+  const { handleValueChange, disabledInputs } = props;
 
   return (
-    <div className="CardInputs">
+    <form className="CardInputs" id="createForm" onSubmit={e => e.preventDefault()}>
+      <div className="CardInputs__row">
+        <Input
+          type="checkbox"
+          checked={statusToBool(status)}
+          disabled={disabledInputs.includes("status")}
+          label="Task is ready:"
+          name="status"
+          onChange={handleValueChange}
+        />
+      </div>
       <div className="CardInputs__row">
         <div>username:</div>
         <input
@@ -12,6 +29,7 @@ export const CardInputs = props => {
           value={username}
           disabled={disabledInputs.includes("username")}
           name="username"
+          required
           onChange={handleValueChange}
         />
       </div>
@@ -19,7 +37,7 @@ export const CardInputs = props => {
       <div className="CardInputs__row">
         <div>email:</div>
         <input
-          type="email"
+          type="text"
           value={email}
           disabled={disabledInputs.includes("email")}
           name="email"
@@ -34,6 +52,7 @@ export const CardInputs = props => {
           value={text}
           disabled={disabledInputs.includes("text")}
           name="text"
+          required
           onChange={handleValueChange}
         />
       </div>
@@ -42,14 +61,17 @@ export const CardInputs = props => {
         <div>Image:</div>
         <input
           type="file"
-          value={image_path}
           disabled={disabledInputs.includes("image_path")}
           name="image_path"
+          required
           onChange={handleValueChange}
+          accept="image/jpeg,image/png,image/gif"
         />
-        {image_path && <img src={image_path} alt="Your uploaded img" />}
+        {image_path && (
+          <img src={URL.createObjectURL(image_path)} alt="Your uploaded img" className="CardInputs__img" />
+        )}
       </div>
-    </div>
+    </form>
   );
 };
 

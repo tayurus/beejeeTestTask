@@ -9,8 +9,8 @@ export const CardView = props => {
   const { editAllowed } = props;
   return (
     <div className="CardView card">
-      {editAllowed && (<i class="material-icons CardView__edit">edit</i>)}
-      <NavLink className="CardView__link" to={"/card/" + id} />
+      {editAllowed && <i class="material-icons CardView__edit">edit</i>}
+      {id && <NavLink className="CardView__link" to={"/card/" + id} />}
       <div className="d-flex align-items-center my-2">
         <div className="mr-3">id:</div>
         <div>{id}</div>
@@ -37,7 +37,11 @@ export const CardView = props => {
       <hr />
       <div className="d-flex align-items-center my-2 flex-wrap">
         <div className="mr-3">image:</div>
-        <img src={image_path} className="CardView__img" alt="your awesome img" />
+        {typeof image_path === "object" ? (
+          <img src={URL.createObjectURL(image_path)} alt="Your uploaded img" className="CardView__img" />
+        ) : (
+          <img src={image_path} className="CardView__img" alt="your awesome img" />
+        )}
       </div>
       <hr />
     </div>
