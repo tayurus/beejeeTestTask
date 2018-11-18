@@ -17,7 +17,7 @@ export const CardView = props => {
       </div>
       <div className="d-flex align-items-center my-2">
         <div className="mr-3">status:</div>
-        <div>{status === statusReady ? "Выполнена" : "Не выполнена"}</div>
+        <div>{(status === statusReady) ? "Выполнена" : "Не выполнена"}</div>
       </div>
       <hr />
       <div className="d-flex align-items-center my-2 flex-wrap">

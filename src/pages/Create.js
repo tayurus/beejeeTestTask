@@ -2,9 +2,11 @@ import React, { Component } from "react";
 
 import { cardsActions } from "./../actions";
 
-import { boolToStatus } from "./../helpers";
+import { boolToStatus, resizeImage } from "./../helpers";
 
 import { connect } from "react-redux";
+
+import {MAX_UPLOAD_WIDTH, MAX_UPLOAD_HEIGHT} from './../constants';
 
 import { Header, CardInputs, CardView } from "./../components";
 
@@ -31,8 +33,10 @@ class Create extends Component {
     const { username, email, text, image_path } = this.state;
     if (username && email && text && image_path) {
       const newCard = Object.assign({}, this.state);
-      newCard.image = newCard.image_path;
-      dispatch(cardsActions.createCard(newCard));
+      resizeImage(image_path, MAX_UPLOAD_WIDTH, MAX_UPLOAD_HEIGHT).then(resizedImage => {
+        newCard.image = resizedImage;
+        dispatch(cardsActions.createCard(newCard));
+      });
     }
   }
 
