@@ -12,6 +12,10 @@ export const CardView = props => {
       {editAllowed && (<i class="material-icons CardView__edit">edit</i>)}
       <NavLink className="CardView__link" to={"/card/" + id} />
       <div className="d-flex align-items-center my-2">
+        <div className="mr-3">id:</div>
+        <div>{id}</div>
+      </div>
+      <div className="d-flex align-items-center my-2">
         <div className="mr-3">status:</div>
         <div>{status === statusReady ? "Выполнена" : "Не выполнена"}</div>
       </div>
@@ -33,7 +37,7 @@ export const CardView = props => {
       <hr />
       <div className="d-flex align-items-center my-2 flex-wrap">
         <div className="mr-3">image:</div>
-        <img src={image_path} className="CardView__img" alt="image from user" />
+        <img src={image_path} className="CardView__img" alt="your awesome img" />
       </div>
       <hr />
     </div>

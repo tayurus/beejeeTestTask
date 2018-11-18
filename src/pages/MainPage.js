@@ -10,6 +10,8 @@ import { Pagination } from "react-materialize";
 
 import { sortConstants } from "./../constants";
 
+import { NavLink } from "react-router-dom";
+
 class MainPage extends Component {
   constructor(props) {
     super(props);
@@ -55,11 +57,18 @@ class MainPage extends Component {
             {cards.map((card, index) => {
               return (
                 <div className="col-lg-4 text-center" key={index}>
-                  <CardView card={card} editAllowed={username !== ''}/>
+                  <CardView card={card} editAllowed={username !== ""} />
                 </div>
               );
             })}
           </div>
+
+          <div className="text-center my-3">
+            <NavLink className="d-inline-block" to="/create">
+              <button className="btn">+</button>
+            </NavLink>
+          </div>
+
           <div className="text-center">
             <Pagination
               items={
