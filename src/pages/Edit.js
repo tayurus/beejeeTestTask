@@ -22,7 +22,6 @@ class Edit extends Component {
 
     this.handleValueChange = this.handleValueChange.bind(this);
     this.togglePreviewMode = this.togglePreviewMode.bind(this);
-    this.createTask = this.createTask.bind(this);
   }
 
   componentWillMount() {
@@ -30,18 +29,6 @@ class Edit extends Component {
     const { cards } = this.props;
     const editedCard = getCardById(cards, editedId);
     this.setState({ ...editedCard });
-  }
-
-  createTask() {
-    const { dispatch } = this.props;
-    const { username, email, text, image_path } = this.state;
-    if (username && email && text && image_path) {
-      const newCard = Object.assign({}, this.state);
-      resizeImage(image_path, MAX_UPLOAD_WIDTH, MAX_UPLOAD_HEIGHT).then(resizedImage => {
-        newCard.image = resizedImage;
-        dispatch(cardsActions.createCard(newCard));
-      });
-    }
   }
 
   handleValueChange(e) {
@@ -88,7 +75,7 @@ class Edit extends Component {
           type="submit"
           form="createForm"
           className="btn d-block mx-auto my-3"
-          onClick={this.createTask}
+          onClick={() => alert("Сорри, я не вьехал в генерацию сигнатуры ;(")}
         >
           Сохранить изменения
         </button>
