@@ -9,8 +9,6 @@ import { Input } from "react-materialize";
 export const CardInputs = props => {
   const { username, email, text, image_path, status } = props.card;
   const { handleValueChange, disabledInputs } = props;
-  console.log("disabledInputs = ", disabledInputs);
-  console.log("disabledInputs includes username ", disabledInputs.includes("username"));
   return (
     <form className="CardInputs" id="createForm" onSubmit={e => e.preventDefault()}>
       <div className="CardInputs__row">

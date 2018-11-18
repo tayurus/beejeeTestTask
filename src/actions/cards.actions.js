@@ -95,7 +95,6 @@ function createCard(newCardData) {
         const { id } = res.message;
         dispatch(success(res.message));
         dispatch(alertActions.success("Карточка создана, ее id = " + id));
-        // history.push("/card/" + id);
       },
       error => {
         dispatch(failure(error));

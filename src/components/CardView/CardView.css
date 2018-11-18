@@ -15,10 +15,11 @@
 .CardView__img {
   width: 100%;
   max-width: 310px;
-  object-fit: none;
+  max-height: 240px;
+  object-fit: contain;
 }
 
-.CardView__edit{
+.CardView__edit {
   position: relative;
   z-index: 1;
   align-self: center;

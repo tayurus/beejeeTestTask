@@ -44,7 +44,6 @@ function createCard(newCardData) {
   form.append("email", email);
   form.append("text", text);
   form.append("image", image);
-
   const requestOptions = {
     method: "POST",
     body: form
@@ -60,9 +59,7 @@ function patchCard(id, newData) {
 
   const bodyWithoutSignature =
     "status=" +
-    (status
-      ? encodeURIComponent(statusReady)
-      : encodeURIComponent(statusNotReady)) +
+    (status ? encodeURIComponent(statusReady) : encodeURIComponent(statusNotReady)) +
     "&text=" +
     encodeURIComponent(text) +
     "&token=" +
@@ -70,8 +67,7 @@ function patchCard(id, newData) {
 
   const md5Hash = md5(bodyWithoutSignature);
 
-  const body =
-    bodyWithoutSignature + "&signature=" + encodeURIComponent(md5Hash);
+  const body = bodyWithoutSignature + "&signature=" + encodeURIComponent(md5Hash);
 
   const query = baseURL + "/edit/" + id;
 

@@ -6,7 +6,7 @@ import { boolToStatus, resizeImage } from "./../helpers";
 
 import { connect } from "react-redux";
 
-import {MAX_UPLOAD_WIDTH, MAX_UPLOAD_HEIGHT} from './../constants';
+import { MAX_UPLOAD_WIDTH, MAX_UPLOAD_HEIGHT } from "./../constants";
 
 import { Header, CardInputs, CardView } from "./../components";
 
@@ -31,6 +31,7 @@ class Create extends Component {
   createTask() {
     const { dispatch } = this.props;
     const { username, email, text, image_path } = this.state;
+
     if (username && email && text && image_path) {
       const newCard = Object.assign({}, this.state);
       resizeImage(image_path, MAX_UPLOAD_WIDTH, MAX_UPLOAD_HEIGHT).then(resizedImage => {
@@ -56,6 +57,7 @@ class Create extends Component {
 
   render() {
     const { previewMode } = this.state;
+    const disabledInputs = ["status"];
     return (
       <div className="Create">
         <Header />
@@ -69,7 +71,11 @@ class Create extends Component {
             ]
           : [
               <h1 className="text-center">Создание задачи</h1>,
-              <CardInputs card={this.state} handleValueChange={this.handleValueChange} />,
+              <CardInputs
+                card={this.state}
+                handleValueChange={this.handleValueChange}
+                disabledInputs={disabledInputs}
+              />,
               <button className="btn d-block mx-auto my-3" onClick={this.togglePreviewMode}>
                 Предпросмотр
               </button>
