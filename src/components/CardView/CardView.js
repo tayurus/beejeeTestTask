@@ -2,13 +2,14 @@ import React from "react";
 import "./CardView.css";
 
 import { NavLink } from "react-router-dom";
-import { statusReady, statusNotReady } from "./../../constants";
+import { statusReady } from "./../../constants";
 
 export const CardView = props => {
   const { id, status, username, email, text, image_path } = props.card;
-
+  const { editAllowed } = props;
   return (
     <div className="CardView card">
+      {editAllowed && (<i class="material-icons CardView__edit">edit</i>)}
       <NavLink className="CardView__link" to={"/card/" + id} />
       <div className="d-flex align-items-center my-2">
         <div className="mr-3">status:</div>

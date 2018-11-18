@@ -54,8 +54,8 @@ class MainPage extends Component {
           <div className="row">
             {cards.map((card, index) => {
               return (
-                <div className="col-lg-4" key={index}>
-                  <CardView card={card} />
+                <div className="col-lg-4 text-center" key={index}>
+                  <CardView card={card} editAllowed={username !== ''}/>
                 </div>
               );
             })}
