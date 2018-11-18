@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 
 import { history, getCardById } from "./helpers";
 import { alertActions, userActions } from "./actions";
-import { Main, Login, Create } from "./pages";
+import { Main, Login, Create, Edit } from "./pages";
 import { CardView, Header } from "./components";
 
 class App extends React.Component {
@@ -33,6 +33,7 @@ class App extends React.Component {
             <Route exact path="/" component={Main} />
             <Route path="/login" component={Login} />
             <Route path="/create" component={Create} />
+            <Route path="/edit/:id" component={Edit} />
             <Route
               path="/card/:id"
               render={props => {

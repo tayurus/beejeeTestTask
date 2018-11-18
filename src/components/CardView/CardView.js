@@ -9,7 +9,11 @@ export const CardView = props => {
   const { editAllowed } = props;
   return (
     <div className="CardView card">
-      {editAllowed && <i class="material-icons CardView__edit">edit</i>}
+      {editAllowed && (
+        <NavLink to={"/edit/" + id}>
+          <i class="material-icons CardView__edit">edit</i>
+        </NavLink>
+      )}
       {id && <NavLink className="CardView__link" to={"/card/" + id} />}
       <div className="d-flex align-items-center my-2">
         <div className="mr-3">id:</div>
@@ -17,7 +21,7 @@ export const CardView = props => {
       </div>
       <div className="d-flex align-items-center my-2">
         <div className="mr-3">status:</div>
-        <div>{(status === statusReady) ? "Выполнена" : "Не выполнена"}</div>
+        <div>{status === statusReady ? "Выполнена" : "Не выполнена"}</div>
       </div>
       <hr />
       <div className="d-flex align-items-center my-2 flex-wrap">

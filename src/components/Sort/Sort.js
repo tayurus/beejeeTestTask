@@ -23,11 +23,9 @@ export const Sort = props => {
       <div className="Sort__items-row">
         {items.map((item, index) => (
           <div
+            key={index}
             onClick={() => handleItemClick(item, index)}
-            className={
-              "Sort__item " +
-              (item === currentItem ? "active " + direction : "")
-            }
+            className={"Sort__item " + (item === currentItem ? "active " + direction : "")}
           >
             {item}
           </div>

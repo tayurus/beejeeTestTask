@@ -67,8 +67,10 @@ export const CardInputs = props => {
           onChange={handleValueChange}
           accept="image/jpeg,image/png,image/gif"
         />
-        {image_path && (
+        {typeof image_path === "object" ? (
           <img src={URL.createObjectURL(image_path)} alt="Your uploaded img" className="CardInputs__img" />
+        ) : (
+          <img src={image_path} alt="Your uploaded img" className="CardInputs__img" />
         )}
       </div>
     </form>

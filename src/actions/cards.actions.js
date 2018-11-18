@@ -99,7 +99,6 @@ function createCard(newCardData) {
       },
       error => {
         dispatch(failure(error));
-        console.log("ERROR = ", error);
         dispatch(
           alertActions.error("Не получилось создать карточку. Ответ сервера: " + responseToText(error))
         );

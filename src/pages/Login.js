@@ -15,8 +15,8 @@ class Login extends Component {
     super(props);
 
     this.state = {
-      user: "",
-      password: ""
+      user: "admin",
+      password: "123"
     };
 
     this.handleValueChange = this.handleValueChange.bind(this);
