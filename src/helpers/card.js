@@ -1,17 +1,19 @@
+import { statusReady, statusNotReady } from "./../constants";
+
 export const getCardById = (cards, id) => {
   return cards.filter(card => card.id === id)[0];
 };
 
 export const boolToStatus = value => {
   if (value) {
-    return "10";
+    return statusReady;
   }
 
-  return "0";
+  return statusNotReady;
 };
 
 export const statusToBool = value => {
-  if (value === "10") {
+  if (value === statusReady) {
     return true;
   }
 

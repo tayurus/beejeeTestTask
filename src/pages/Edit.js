@@ -17,11 +17,6 @@ class Edit extends Component {
     super(props);
 
     this.state = {
-      username: "",
-      email: "",
-      text: "",
-      image_path: "",
-      status: false,
       previewMode: false
     };
 
