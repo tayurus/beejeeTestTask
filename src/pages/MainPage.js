@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-import { cardsActions, userActions } from "./../actions";
+import { cardsActions } from "./../actions";
 
 import { connect } from "react-redux";
 
@@ -33,13 +33,7 @@ class MainPage extends Component {
   }
 
   render() {
-    const {
-      username,
-      cards,
-      totalCardsCount,
-      sortField,
-      sortDirection
-    } = this.props;
+    const { username, cards, totalCardsCount, sortField, sortDirection } = this.props;
 
     if (cards) {
       return (
@@ -71,9 +65,7 @@ class MainPage extends Component {
 
           <div className="text-center">
             <Pagination
-              items={
-                parseInt(totalCardsCount / 3) + (totalCardsCount % 3 !== 0)
-              }
+              items={parseInt(totalCardsCount / 3) + (totalCardsCount % 3 !== 0)}
               activePage={1}
               maxButtons={10}
               className="d-inline-block"
@@ -89,12 +81,7 @@ class MainPage extends Component {
 }
 
 function mapStateToProps(state) {
-  const {
-    cards,
-    totalCardsCount,
-    sortField,
-    sortDirection
-  } = state.cardsReducer;
+  const { cards, totalCardsCount, sortField, sortDirection } = state.cardsReducer;
   const { username } = state.user;
   return {
     cards,
