@@ -75,7 +75,11 @@ class Edit extends Component {
           type="submit"
           form="createForm"
           className="btn d-block mx-auto my-3"
-          onClick={() => alert("Сорри, я не вьехал в генерацию сигнатуры ;(")}
+          onClick={() =>
+            alert(
+              "Сорри, я не вьехал в генерацию сигнатуры, но я пытался -> src/services/cards.service.js - функция patchCard"
+            )
+          }
         >
           Сохранить изменения
         </button>
