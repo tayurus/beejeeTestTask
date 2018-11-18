@@ -59,7 +59,7 @@ class Edit extends Component {
   }
 
   render() {
-    const disabledInputs = ["username, email, image_path"];
+    const disabledInputs = ["username", "email", "image_path"];
     const { previewMode } = this.state;
     const { username } = this.props;
     return (
