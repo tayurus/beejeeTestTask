@@ -1,14 +1,10 @@
 import React, { Component } from "react";
 
-import { cardsActions } from "./../actions";
-
-import { boolToStatus, resizeImage } from "./../helpers";
+import { boolToStatus } from "./../helpers";
 
 import { getCardById } from "./../helpers";
 
 import { connect } from "react-redux";
-
-import { MAX_UPLOAD_WIDTH, MAX_UPLOAD_HEIGHT } from "./../constants";
 
 import { Header, CardInputs, CardView } from "./../components";
 

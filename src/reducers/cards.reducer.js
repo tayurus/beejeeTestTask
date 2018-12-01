@@ -16,26 +16,11 @@ export function cardsReducer(state = initialState, action) {
         ...state,
         cards: action.cards.message.tasks,
         pageNumber: action.pageNumber,
-        totalCardsCount: action.cards.message.total_task_count
-      };
-    case cardsConstants.GET_CARDS_FAILURE:
-      return {
-        ...state,
-        error: action.error
-      };
-
-    case cardsConstants.SORT_CARDS_REQUEST:
-      return state;
-
-    case cardsConstants.SORT_CARDS_SUCCESS:
-      return {
-        ...state,
-        cards: action.cards.message.tasks,
+        totalCardsCount: action.cards.message.total_task_count,
         sortField: action.sortField,
         sortDirection: action.sortDirection
       };
-
-    case cardsConstants.SORT_CARDS_FAILURE:
+    case cardsConstants.GET_CARDS_FAILURE:
       return {
         ...state,
         error: action.error

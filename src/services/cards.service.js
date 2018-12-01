@@ -1,38 +1,27 @@
 import { baseURL, token, statusReady, statusNotReady } from "./../constants";
 import { handleResponse } from "./../helpers";
+import { sortConstants } from "./../constants";
 const md5 = require("md5");
 
 export const cardsService = {
   getCards,
-  sortCards,
   createCard,
   patchCard
 };
 
-function getCards(pageNumber) {
+function getCards(pageNumber = 1, sortField = sortConstants[0], sortDirection = "asc") {
   const requestOptions = {
     method: "GET",
     headers: { "Content-Type": "application/json" }
   };
-  const query = baseURL + "/?developer=Name&page=" + pageNumber;
-
-  return fetch(query, requestOptions).then(handleResponse);
-}
-
-function sortCards(sortField = "id", sortDirection = "asc", pageNumber = 0) {
-  const requestOptions = {
-    method: "GET",
-    headers: { "Content-Type": "application/json" }
-  };
-
   const query =
     baseURL +
-    "/?developer=Name&page=" +
-    pageNumber +
-    "&sort_field=" +
+    "/?developer=Name&sort_field=" +
     sortField +
     "&sort_direction=" +
-    sortDirection;
+    sortDirection +
+    "&page=" +
+    pageNumber;
 
   return fetch(query, requestOptions).then(handleResponse);
 }

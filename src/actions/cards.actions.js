@@ -1,19 +1,20 @@
 import { cardsConstants } from "./../constants";
 import { cardsService } from "./../services";
 import { alertActions } from "./";
-import { history } from "./../helpers";
 import { responseToText } from "./../helpers";
-export const cardsActions = { getCards, sortCards, createCard };
+export const cardsActions = { getCards, createCard };
 
-function getCards(pageNumber) {
+function getCards(pageNumber, sortField, sortDirection) {
   return dispatch => {
     dispatch(request(pageNumber));
     dispatch(alertActions.success("Запрос карточек для страницы " + pageNumber));
 
-    cardsService.getCards(pageNumber).then(
+    cardsService.getCards(pageNumber, sortField, sortDirection).then(
       cards => {
-        dispatch(success(cards, pageNumber));
-        dispatch(alertActions.success("Запрос карточек для страницы " + pageNumber + " выполнился успешно"));
+        dispatch(success(cards, pageNumber, sortField, sortDirection));
+        dispatch(
+          alertActions.success("Запрос карточек для страницы " + pageNumber + " выполнился успешно")
+        );
       },
       error => {
         dispatch(failure(error, pageNumber));
@@ -25,63 +26,11 @@ function getCards(pageNumber) {
   function request(pageNumber) {
     return { type: cardsConstants.GET_CARDS_REQUEST, pageNumber };
   }
-  function success(cards, pageNumber) {
-    return { type: cardsConstants.GET_CARDS_SUCCESS, cards, pageNumber };
+  function success(cards, pageNumber, sortField, sortDirection) {
+    return { type: cardsConstants.GET_CARDS_SUCCESS, cards, pageNumber, sortField, sortDirection };
   }
   function failure(error, pageNumber) {
     return { type: cardsConstants.GET_CARDS_FAILURE, error, pageNumber };
-  }
-}
-
-function sortCards(sortField = "id", sortDirection = "asc", pageNumber = 0) {
-  return dispatch => {
-    dispatch(request(sortField, sortDirection));
-    dispatch(
-      alertActions.success("Сортируем карточки по полю " + sortField + " в направлении " + sortDirection)
-    );
-
-    cardsService.sortCards(sortField, sortDirection).then(
-      cards => {
-        dispatch(success(cards, sortField, sortDirection));
-        dispatch(
-          alertActions.success(
-            "Карточки успешно отсортированы по полю " + sortField + " в направлении " + sortDirection
-          )
-        );
-      },
-      error => {
-        dispatch(failure(error, sortField, sortDirection));
-        dispatch(
-          alertActions.error(
-            "Не получилось отсортировать карточки по полю " + sortField + " в направлении " + sortDirection
-          )
-        );
-      }
-    );
-  };
-
-  function request(sortField, sortDirection) {
-    return {
-      type: cardsConstants.SORT_CARDS_REQUEST,
-      sortField,
-      sortDirection
-    };
-  }
-  function success(cards, sortField, sortDirection) {
-    return {
-      type: cardsConstants.SORT_CARDS_SUCCESS,
-      cards,
-      sortField,
-      sortDirection
-    };
-  }
-  function failure(error, sortField, sortDirection) {
-    return {
-      type: cardsConstants.SORT_CARDS_FAILURE,
-      error,
-      sortField,
-      sortDirection
-    };
   }
 }
 
@@ -99,7 +48,9 @@ function createCard(newCardData) {
       error => {
         dispatch(failure(error));
         dispatch(
-          alertActions.error("Не получилось создать карточку. Ответ сервера: " + responseToText(error))
+          alertActions.error(
+            "Не получилось создать карточку. Ответ сервера: " + responseToText(error)
+          )
         );
       }
     );
