@@ -4,7 +4,7 @@ import { sortConstants } from "./../constants";
 
 let initialState = {
   sortDirection: "asc",
-  sortField: sortConstants[0]
+  sortField: sortConstants[2]
 };
 
 export function cardsReducer(state = initialState, action) {

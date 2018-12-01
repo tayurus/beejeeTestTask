@@ -20,8 +20,10 @@ class Main extends Component {
 
     this.loadPage = this.loadPage.bind(this);
     this.onSortItemClick = this.onSortItemClick.bind(this);
+  }
 
-    this.loadPage(this.currentPaginationPage);
+  componentDidMount() {
+    this.loadPage(this.state.currentPaginationPage);
   }
 
   loadPage(page) {
@@ -40,7 +42,6 @@ class Main extends Component {
   render() {
     const { username, cards, totalCardsCount, sortField, sortDirection } = this.props;
     const { currentPaginationPage } = this.state;
-    console.log("SORT FIELD = ", sortField, " sortDirection =  ", sortDirection);
     if (cards) {
       return (
         <div className="App container">

@@ -8,12 +8,12 @@ export const Sort = props => {
   function handleItemClick(item, index) {
     if (currentItem === item) {
       if (props.direction === "desc") {
-        props.onItemClick(item, "asc");
+        onItemClick(item, "asc");
       } else {
-        props.onItemClick(item, "desc");
+        onItemClick(item, "desc");
       }
     } else {
-      props.onItemClick(item, "asc");
+      onItemClick(item, "asc");
     }
   }
 

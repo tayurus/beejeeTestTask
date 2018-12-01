@@ -9,7 +9,7 @@ export const cardsService = {
   patchCard
 };
 
-function getCards(pageNumber = 1, sortField = sortConstants[0], sortDirection = "asc") {
+function getCards(pageNumber = 1, sortField = sortConstants[2], sortDirection = "asc") {
   const requestOptions = {
     method: "GET",
     headers: { "Content-Type": "application/json" }
