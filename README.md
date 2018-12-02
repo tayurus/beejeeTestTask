@@ -1,1 +1,1 @@
-DEMO [DEMO](http://tayurus.zzz.com.ua)
+[DEMO](http://tayurus.zzz.com.ua)
