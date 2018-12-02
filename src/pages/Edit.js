@@ -8,6 +8,8 @@ import { connect } from "react-redux";
 
 import { Header, CardInputs, CardView } from "./../components";
 
+import { cardsActions } from "./../actions";
+
 class Edit extends Component {
   constructor(props) {
     super(props);
@@ -18,6 +20,7 @@ class Edit extends Component {
 
     this.handleValueChange = this.handleValueChange.bind(this);
     this.togglePreviewMode = this.togglePreviewMode.bind(this);
+    this.handlePatchCardClicked = this.handlePatchCardClicked.bind(this);
   }
 
   componentWillMount() {
@@ -39,6 +42,12 @@ class Edit extends Component {
 
   togglePreviewMode() {
     this.setState({ previewMode: !this.state.previewMode });
+  }
+
+  handlePatchCardClicked() {
+    const { dispatch } = this.props;
+    const card = this.state;
+    dispatch(cardsActions.patchCard(card.id, card));
   }
 
   render() {
@@ -71,11 +80,7 @@ class Edit extends Component {
           type="submit"
           form="createForm"
           className="btn d-block mx-auto my-3"
-          onClick={() =>
-            alert(
-              "Сорри, я не вьехал в генерацию сигнатуры, но я пытался -> src/services/cards.service.js - функция patchCard"
-            )
-          }
+          onClick={this.handlePatchCardClicked}
         >
           Сохранить изменения
         </button>

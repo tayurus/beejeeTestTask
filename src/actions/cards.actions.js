@@ -2,7 +2,7 @@ import { cardsConstants } from "./../constants";
 import { cardsService } from "./../services";
 import { alertActions } from "./";
 import { responseToText } from "./../helpers";
-export const cardsActions = { getCards, createCard };
+export const cardsActions = { getCards, createCard, patchCard };
 
 function getCards(pageNumber, sortField, sortDirection) {
   return dispatch => {
@@ -71,6 +71,45 @@ function createCard(newCardData) {
   function failure(error) {
     return {
       type: cardsConstants.CREATE_CARD_FAILURE,
+      error
+    };
+  }
+}
+
+function patchCard(id, newCardData) {
+  return dispatch => {
+    dispatch(request());
+
+    cardsService.patchCard(id, newCardData).then(
+      res => {
+        dispatch(success());
+        dispatch(alertActions.success("Карточка успешно отредактирована!"));
+      },
+      error => {
+        dispatch(failure(error));
+        dispatch(
+          alertActions.success(
+            "Не удалось отредактировать карточку! Ответ сервера: " + responseToText(error)
+          )
+        );
+      }
+    );
+  };
+
+  function request() {
+    return {
+      type: cardsConstants.PATCH_CARD_REQUEST
+    };
+  }
+  function success() {
+    return {
+      type: cardsConstants.PATCH_CARD_SUCCESS
+    };
+  }
+
+  function failure(error) {
+    return {
+      type: cardsConstants.PATCH_CARD_FAILURE,
       error
     };
   }

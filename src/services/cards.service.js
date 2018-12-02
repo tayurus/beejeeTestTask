@@ -1,5 +1,5 @@
 import { baseURL, token, statusReady, statusNotReady } from "./../constants";
-import { handleResponse } from "./../helpers";
+import { handleResponse, fixedEncodeURIComponent } from "./../helpers";
 import { sortConstants } from "./../constants";
 const md5 = require("md5");
 
@@ -45,24 +45,26 @@ function createCard(newCardData) {
 
 function patchCard(id, newData) {
   const { text, status } = newData;
+  const query = "https://uxcandy.com/~shapoval/test-task-backend/edit/" + id + "/?developer=Name";
 
-  const bodyWithoutSignature =
+  let formData = new FormData();
+  formData.append("status", status ? statusReady : statusNotReady);
+  formData.append("text", text);
+  formData.append("token", token);
+
+  let bodyWithoutSignature =
     "status=" +
-    (status ? encodeURIComponent(statusReady) : encodeURIComponent(statusNotReady)) +
+    fixedEncodeURIComponent(status) +
     "&text=" +
-    encodeURIComponent(text) +
+    fixedEncodeURIComponent(text) +
     "&token=" +
-    encodeURIComponent(token);
+    fixedEncodeURIComponent(token);
 
-  const md5Hash = md5(bodyWithoutSignature);
-
-  const body = bodyWithoutSignature + "&signature=" + encodeURIComponent(md5Hash);
-
-  const query = baseURL + "/edit/" + id;
+  formData.append("signature", md5(bodyWithoutSignature));
 
   const requestOptions = {
     method: "POST",
-    body: body
+    body: formData
   };
 
   return fetch(query, requestOptions).then(handleResponse);

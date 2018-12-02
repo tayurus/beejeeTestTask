@@ -11,5 +11,11 @@ export function handleResponse(response) {
 }
 
 export function responseToText(response) {
-  return Object.keys(response).reduce((acc, key) => acc + response[key] + "; ", "");
+  return Object.keys(response).reduce((acc, key) => acc + response[key] + "", "");
+}
+
+export function fixedEncodeURIComponent(str) {
+  return encodeURIComponent(str).replace(/[!'()*]/g, function(c) {
+    return "%" + c.charCodeAt(0).toString(16);
+  });
 }
